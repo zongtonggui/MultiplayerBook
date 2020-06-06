@@ -19,14 +19,13 @@ void OutputMemoryBitStream::WriteBits( uint8_t inData,
 	uint8_t currentMask = ~( 0xff << bitOffset );
 	mBuffer[ byteOffset ] = ( mBuffer[ byteOffset ] & currentMask ) | ( inData << bitOffset );
 	
-	//calculate how many bits were not yet used in
-	//our target byte in the buffer
+	//计算在缓存区中一个字节有多少bit 是没有使用的
 	uint32_t bitsFreeThisByte = 8 - bitOffset;
 	
-	//if we needed more than that, carry to the next byte
+	//如果我们需要的不止这些，请转到下一个字节
 	if( bitsFreeThisByte < inBitCount )
 	{
-		//we need another byte
+		//我们需要更多的字节
 		mBuffer[ byteOffset + 1 ] = inData >> bitsFreeThisByte;
 	}
 	
