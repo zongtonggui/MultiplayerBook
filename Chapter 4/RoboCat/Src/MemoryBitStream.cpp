@@ -15,7 +15,7 @@ void OutputMemoryBitStream::WriteBits( uint8_t inData,
 	//and the bitOffset by taking the last 3 bits
 	uint32_t byteOffset = mBitHead >> 3;
 	uint32_t bitOffset = mBitHead & 0x7;
-	
+	//获取哪些bit 是有数据的
 	uint8_t currentMask = ~( 0xff << bitOffset );
 	mBuffer[ byteOffset ] = ( mBuffer[ byteOffset ] & currentMask ) | ( inData << bitOffset );
 	
